@@ -1,11 +1,13 @@
 import BrandsTheme from './shared/brands.theme';
+import {Theme} from '~/interfaces/ThemeProps';
 
-const DarkTheme = {
+const DarkTheme: Theme = {
   ...BrandsTheme,
   primary: '#222',
-  secondary: '#fff',
+  secondary: 'rgba(230,230,230,.7)',
   textPrimary: '#fff',
   textSecondary: '#222',
+  background: '#222',
 
   danger: '#e00909',
   warning: '#ffcc00',
