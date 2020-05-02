@@ -1,0 +1,3 @@
+"transformIgnorePatterns": [
+    "<rootDir>/(node_modules)/@fortawesome/react-native-fontawesome"
+  ]
