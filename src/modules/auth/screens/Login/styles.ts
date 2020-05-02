@@ -2,6 +2,8 @@ import styled from 'styled-components/native';
 
 import {ThemeProps} from '~/interfaces/ThemeProps';
 
+export const ScrollView = styled.ScrollView``;
+
 export const SafeArea = styled.SafeAreaView`
   flex: 1;
   background: ${({theme}: ThemeProps) => theme.background};
@@ -12,7 +14,9 @@ export const Container = styled.View`
   padding-right: 40px;
 `;
 
-export const ContainerInputs = styled.View``;
+export const ContainerInputs = styled.View`
+  margin-top: 8px;
+`;
 
 export const LoginButton = styled.TouchableOpacity`
   background-color: ${({theme}: ThemeProps) => theme.secondary};
@@ -82,5 +86,7 @@ export const TextOr = styled.Text`
 `;
 
 export const ContainerSocial = styled.View`
-  margin-top: 32px;
+  margin-top: 16px;
+  /* flex-direction: row; */
+  /* justify-content: space-around; */
 `;

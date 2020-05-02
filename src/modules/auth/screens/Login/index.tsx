@@ -6,6 +6,7 @@ import {faLock} from '@fortawesome/free-solid-svg-icons';
 import Input from '#/core/components/Input';
 
 import {
+  ScrollView,
   Container,
   LoginButton,
   LoginButtonText,
@@ -47,62 +48,65 @@ export default function LoginScreen({navigation}: Props) {
 
   return (
     <SafeArea>
-      <Container>
-        <Logo />
-        <ContainerInputs>
-          <Input
-            leftIcon={faEnvelope}
-            placeholder="Email"
-            autoCapitalize="none"
-            autoCorrect
-            autoCompleteType="email"
-            keyboardType="email-address"
-            blurOnSubmit={false}
-            onChangeText={setEmail}
-            value={email}
-            onSubmitEditing={() => {
-              inputPassword.current?.focus();
-            }}
-          />
-          <Input
-            placeholder="Senha"
-            autoCorrect
-            autoCapitalize="none"
-            leftIcon={faLock}
-            secureTextEntry={true}
-            onChangeText={setPassword}
-            value={password}
-            ref={inputPassword}
-            onSubmitEditing={submitLogin}
-          />
+      <ScrollView>
+        <Container>
+          <Logo />
+          <ContainerInputs>
+            <Input
+              leftIcon={faEnvelope}
+              placeholder="Email"
+              autoCapitalize="none"
+              autoCorrect
+              autoCompleteType="email"
+              keyboardType="email-address"
+              blurOnSubmit={false}
+              onChangeText={setEmail}
+              value={email}
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                inputPassword.current?.focus();
+              }}
+            />
+            <Input
+              placeholder="Senha"
+              autoCorrect
+              autoCapitalize="none"
+              leftIcon={faLock}
+              secureTextEntry={true}
+              onChangeText={setPassword}
+              value={password}
+              ref={inputPassword}
+              onSubmitEditing={submitLogin}
+            />
 
-          <LoginButton onPress={submitLogin}>
-            <LoginButtonText>Entrar</LoginButtonText>
-          </LoginButton>
-        </ContainerInputs>
-        <ForgotPassword>
-          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-        </ForgotPassword>
+            <LoginButton onPress={submitLogin}>
+              <LoginButtonText>Entrar</LoginButtonText>
+            </LoginButton>
+          </ContainerInputs>
+          <ForgotPassword>
+            <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+          </ForgotPassword>
 
-        <CreateAccountContainer>
-          <DontHaveAccountText>Não tem uma conta?</DontHaveAccountText>
-          <CreateAccounButton onPress={signUp}>
-            <CreateAccountText>Cadastre-se aqui</CreateAccountText>
-          </CreateAccounButton>
-        </CreateAccountContainer>
+          <CreateAccountContainer>
+            <DontHaveAccountText>Não tem uma conta?</DontHaveAccountText>
+            <CreateAccounButton onPress={signUp}>
+              <CreateAccountText>Cadastre-se aqui</CreateAccountText>
+            </CreateAccounButton>
+          </CreateAccountContainer>
 
-        <ContainerTextOr>
-          <LineTextOr />
-          <TextOr>OU</TextOr>
-          <LineTextOr />
-        </ContainerTextOr>
+          <ContainerTextOr>
+            <LineTextOr />
+            <TextOr>OU</TextOr>
+            <LineTextOr />
+          </ContainerTextOr>
 
-        <ContainerSocial>
-          {Platform.OS === 'ios' && <Apple />}
-          <Google />
-          <Facebook />
-        </ContainerSocial>
-      </Container>
+          <ContainerSocial>
+            {Platform.OS === 'ios' && <Apple />}
+            <Google />
+            <Facebook />
+          </ContainerSocial>
+        </Container>
+      </ScrollView>
     </SafeArea>
   );
 }
