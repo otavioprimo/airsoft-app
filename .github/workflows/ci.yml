@@ -3,7 +3,7 @@ name: Build Android
 on:
   push:
     branches:
-      - master
+      - test
 jobs:
   install:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
-          
+
   build-android:
     needs: install
     runs-on: ubuntu-latest
