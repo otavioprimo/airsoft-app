@@ -15,4 +15,7 @@ export interface Theme {
 
   google: string;
   facebook: string;
+  apple: string;
+
+  fontFamily: string;
 }

@@ -2,6 +2,7 @@ import BrandsTheme from './shared/brands.theme';
 import {Theme} from '~/interfaces/ThemeProps';
 
 const DarkTheme: Theme = {
+  fontFamily: 'copperplate',
   ...BrandsTheme,
   primary: '#222',
   secondary: 'rgba(230,230,230,.7)',

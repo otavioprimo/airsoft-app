@@ -1,13 +1,37 @@
 import React, {createRef, useState} from 'react';
-import {TextInput} from 'react-native';
+import {TextInput, Platform} from 'react-native';
 import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 import {faLock} from '@fortawesome/free-solid-svg-icons';
 
 import Input from '#/core/components/Input';
 
-import {Container, ContainerInputs} from './styles';
+import {
+  Container,
+  LoginButton,
+  LoginButtonText,
+  ContainerInputs,
+  SafeArea,
+  ForgotPassword,
+  ForgotPasswordText,
+  CreateAccountContainer,
+  DontHaveAccountText,
+  CreateAccountText,
+  CreateAccounButton,
+  TextOr,
+  ContainerTextOr,
+  LineTextOr,
+  ContainerSocial,
+} from './styles';
+import Logo from '~/modules/core/components/Logo';
+import Google from '~/modules/core/components/Social/google';
+import Facebook from '~/modules/core/components/Social/facebook';
+import Apple from '~/modules/core/components/Social/apple';
 
-export default function LoginScreen() {
+interface Props {
+  navigation?: any;
+}
+
+export default function LoginScreen({navigation}: Props) {
   let inputPassword: React.RefObject<TextInput> = createRef();
 
   const [email, setEmail] = useState('');
@@ -17,35 +41,68 @@ export default function LoginScreen() {
     console.log('submit');
   };
 
+  const signUp = () => {
+    navigation.navigate('Signup');
+  };
+
   return (
-    <Container>
-      <ContainerInputs>
-        <Input
-          leftIcon={faEnvelope}
-          placeholder="Email"
-          autoCapitalize="none"
-          autoCorrect
-          autoCompleteType="email"
-          keyboardType="email-address"
-          blurOnSubmit={false}
-          onChangeText={setEmail}
-          value={email}
-          onSubmitEditing={() => {
-            inputPassword.current?.focus();
-          }}
-        />
-        <Input
-          placeholder="Senha"
-          autoCorrect
-          autoCapitalize="none"
-          leftIcon={faLock}
-          secureTextEntry={true}
-          onChangeText={setPassword}
-          value={password}
-          ref={inputPassword}
-          onSubmitEditing={submitLogin}
-        />
-      </ContainerInputs>
-    </Container>
+    <SafeArea>
+      <Container>
+        <Logo />
+        <ContainerInputs>
+          <Input
+            leftIcon={faEnvelope}
+            placeholder="Email"
+            autoCapitalize="none"
+            autoCorrect
+            autoCompleteType="email"
+            keyboardType="email-address"
+            blurOnSubmit={false}
+            onChangeText={setEmail}
+            value={email}
+            onSubmitEditing={() => {
+              inputPassword.current?.focus();
+            }}
+          />
+          <Input
+            placeholder="Senha"
+            autoCorrect
+            autoCapitalize="none"
+            leftIcon={faLock}
+            secureTextEntry={true}
+            onChangeText={setPassword}
+            value={password}
+            ref={inputPassword}
+            onSubmitEditing={submitLogin}
+          />
+
+          <LoginButton onPress={submitLogin}>
+            <LoginButtonText>Entrar</LoginButtonText>
+          </LoginButton>
+        </ContainerInputs>
+        <ForgotPassword>
+          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+        </ForgotPassword>
+
+        <CreateAccountContainer>
+          <DontHaveAccountText>Não tem uma conta?</DontHaveAccountText>
+          <CreateAccounButton onPress={signUp}>
+            <CreateAccountText>Cadastre-se aqui</CreateAccountText>
+          </CreateAccounButton>
+        </CreateAccountContainer>
+
+        <ContainerTextOr>
+          <LineTextOr />
+          <TextOr>OU</TextOr>
+          <LineTextOr />
+        </ContainerTextOr>
+
+        <ContainerSocial>
+          {Platform.OS === 'ios' && <Apple />}
+          <Google />
+          <Facebook />
+        </ContainerSocial>
+      </Container>
+    </SafeArea>
   );
 }
