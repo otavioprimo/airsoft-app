@@ -67,6 +67,9 @@
 		<string>OpenSans-SemiBold.ttf</string>
 		<string>OpenSans-SemiBoldItalic.ttf</string>
 		<string>copperplate-gothic.otf</string>
+		<string>copperplate-gothic-bold-bt.ttf</string>
+		<string>copperplate-gothic-bold-condensed.otf</string>
+		<string>copperplate-gothic-bold.ttf</string>
 	</array>
 </dict>
 </plist>

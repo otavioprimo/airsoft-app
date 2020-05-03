@@ -18,4 +18,5 @@ export interface Theme {
   apple: string;
 
   fontFamily: string;
+  fontFamilySecondary: string;
 }

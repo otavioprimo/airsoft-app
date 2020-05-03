@@ -6,7 +6,8 @@ import {faLock} from '@fortawesome/free-solid-svg-icons';
 import Input from '#/core/components/Input';
 
 import {
-  ScrollView,
+  Background,
+  Overlay,
   Container,
   LoginButton,
   LoginButtonText,
@@ -22,6 +23,7 @@ import {
   ContainerTextOr,
   LineTextOr,
   ContainerSocial,
+  ContainerSocialIOS,
 } from './styles';
 import Logo from '~/modules/core/components/Logo';
 import Google from '~/modules/core/components/Social/google';
@@ -46,9 +48,29 @@ export default function LoginScreen({navigation}: Props) {
     navigation.navigate('Signup');
   };
 
+  const renderContainerSocial = () => {
+    if (Platform.OS === 'ios') {
+      return (
+        <ContainerSocialIOS>
+          <Apple />
+          <Google />
+          <Facebook />
+        </ContainerSocialIOS>
+      );
+    }
+
+    return (
+      <ContainerSocial>
+        <Google />
+        <Facebook />
+      </ContainerSocial>
+    );
+  };
+
   return (
     <SafeArea>
-      <ScrollView>
+      <Background source={require('~/assets/montains.jpg')}>
+        <Overlay />
         <Container>
           <Logo />
           <ContainerInputs>
@@ -100,13 +122,9 @@ export default function LoginScreen({navigation}: Props) {
             <LineTextOr />
           </ContainerTextOr>
 
-          <ContainerSocial>
-            {Platform.OS === 'ios' && <Apple />}
-            <Google />
-            <Facebook />
-          </ContainerSocial>
+          {renderContainerSocial()}
         </Container>
-      </ScrollView>
+      </Background>
     </SafeArea>
   );
 }

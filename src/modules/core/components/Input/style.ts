@@ -12,7 +12,7 @@ export const InputText = styled.TextInput.attrs(({theme}: ThemeProps) => ({
   placeholderTextColor: theme.secondary,
 }))`
   color: ${({theme}: ThemeProps) => theme.secondary};
-  font-size: 18px;
+  font-size: 16px;
   border-bottom-color: ${({theme}: ThemeProps) => theme.secondary};
   border-bottom-width: 1px;
   flex: 1;
@@ -28,6 +28,6 @@ export const ContainerIcon = styled.View`
 `;
 
 export const Icon = styled(FontAwesomeIcon).attrs(({theme}: ThemeProps) => ({
-  size: 25,
+  size: 20,
   color: theme.secondary,
 }))``;

@@ -5,12 +5,14 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LoginScreen from '~/modules/auth/screens/Login';
 import SignupScreen from '~/modules/auth/screens/Signup';
 
+import Theme from '~/themes/index';
+
 const Stack = createStackNavigator();
 
 export default function AuthNavigation() {
   return (
     <>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" backgroundColor={Theme.background} />
       <Stack.Navigator
         screenOptions={{
           headerShown: false,

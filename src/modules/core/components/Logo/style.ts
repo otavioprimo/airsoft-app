@@ -4,4 +4,5 @@ export const Image = styled.Image`
   align-self: center;
   width: 150px;
   height: 150px;
+  margin: 8px;
 `;

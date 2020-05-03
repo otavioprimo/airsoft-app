@@ -4,18 +4,20 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {ThemeProps} from '~/interfaces/ThemeProps';
 
 export const Button = styled.TouchableOpacity`
-  height: 50px;
+  height: 45px;
   justify-content: center;
   align-items: center;
-  background-color: blue;
-  flex-direction: row;
   border-radius: 20px;
+  flex-direction: row;
+  flex: 1;
+  margin-left: 4px;
+  margin-right: 4px;
 `;
 
 export const Text = styled.Text`
-  font-family: ${({theme}: ThemeProps) => theme.fontFamily};
+  font-family: ${({theme}: ThemeProps) => theme.fontFamilySecondary};
   color: ${({theme}: ThemeProps) => theme.textPrimary};
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const Icon = styled(FontAwesomeIcon).attrs(() => ({
