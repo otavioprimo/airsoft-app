@@ -69,7 +69,7 @@ export default function LoginScreen({navigation}: Props) {
 
   return (
     <SafeArea>
-      <Background source={require('~/assets/montains.jpg')}>
+      <Background source={require('~/assets/cave.jpg')}>
         <Overlay />
         <Container>
           <Logo />

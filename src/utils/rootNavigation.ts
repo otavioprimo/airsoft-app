@@ -15,3 +15,7 @@ export function reset(name: string, params?: any) {
     routes: [{name, params}],
   });
 }
+
+export function goBack() {
+  navigationRef.current?.goBack();
+}

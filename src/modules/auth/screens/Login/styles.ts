@@ -9,7 +9,7 @@ export const Background = styled.ImageBackground`
 export const Overlay = styled.View`
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(10, 0, 0, 0.7);
   position: absolute;
   z-index: 1;
 `;
