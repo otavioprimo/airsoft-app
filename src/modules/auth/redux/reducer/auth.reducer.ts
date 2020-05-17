@@ -1,5 +1,6 @@
 import {createReducer, createActions} from 'reduxsauce';
 import Immutable from 'seamless-immutable';
+// import {markActionsOffline} from 'redux-offline-queue';
 
 import {
   AuthActionTypes,
@@ -18,6 +19,8 @@ const {Types, Creators} = createActions<AuthActionTypes, CreatorsTypes>(
     prefix: 'auth/',
   },
 );
+
+// markActionsOffline(Creators, ['login']);
 
 const INITIAL_STATE: AuthState = Immutable({
   success: null,
