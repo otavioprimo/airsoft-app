@@ -26,7 +26,8 @@ const INITIAL_STATE: AuthState = Immutable({
 });
 
 export default createReducer<AuthState, ReducerTypes>(INITIAL_STATE, {
-  [Types.LOGIN]: (state) => state.merge({loading: true}),
+  [Types.LOGIN]: (state) =>
+    state.merge({loading: true, success: null, error: null}),
 
   [Types.LOGIN_SUCCESS]: (state, action) =>
     state.merge({
@@ -35,8 +36,8 @@ export default createReducer<AuthState, ReducerTypes>(INITIAL_STATE, {
       success: action.payload,
     }),
 
-  [Types.LOGIN_FAILURE]: (state) =>
-    state.merge({error: 'Deu ruim', success: null, loading: false}),
+  [Types.LOGIN_FAILURE]: (state, action) =>
+    state.merge({error: action.error, success: null, loading: false}),
 });
 
 export const AuthActions = Creators;

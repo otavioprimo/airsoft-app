@@ -1,7 +1,8 @@
 import React, {createRef, useState} from 'react';
-import {TextInput, Platform} from 'react-native';
+import {TextInput} from 'react-native';
 import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 import {faLock} from '@fortawesome/free-solid-svg-icons';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Input from '#/core/components/Input';
 
@@ -19,16 +20,22 @@ import {
   DontHaveAccountText,
   CreateAccountText,
   CreateAccounButton,
-  TextOr,
-  ContainerTextOr,
-  LineTextOr,
-  ContainerSocial,
-  ContainerSocialIOS,
+  ErrorText,
+  // TextOr,
+  // ContainerTextOr,
+  // LineTextOr,
+  // ContainerSocial,
+  // ContainerSocialIOS,
+  // Google,
+  // Facebook,
+  // Apple,
 } from './styles';
 import Logo from '~/modules/core/components/Logo';
-import Google from '~/modules/core/components/Social/google';
-import Facebook from '~/modules/core/components/Social/facebook';
-import Apple from '~/modules/core/components/Social/apple';
+import {AuthActions} from '../../redux/reducer/auth.reducer';
+import {
+  authErrorSelector,
+  authLoadingSelector,
+} from '../../redux/selectors/auth.selector';
 
 interface Props {
   navigation?: any;
@@ -37,17 +44,23 @@ interface Props {
 export default function LoginScreen({navigation}: Props) {
   let inputPassword: React.RefObject<TextInput> = createRef();
 
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const authError = useSelector(authErrorSelector);
+  const authLoading = useSelector(authLoadingSelector);
+
   const submitLogin = () => {
-    console.log('submit');
+    dispatch(AuthActions.login(email, password));
   };
 
   const signUp = () => {
     navigation.navigate('Signup');
   };
 
+  /* TODO login social fora da Beta
   const renderContainerSocial = () => {
     if (Platform.OS === 'ios') {
       return (
@@ -66,6 +79,7 @@ export default function LoginScreen({navigation}: Props) {
       </ContainerSocial>
     );
   };
+  */
 
   return (
     <SafeArea>
@@ -101,8 +115,14 @@ export default function LoginScreen({navigation}: Props) {
               onSubmitEditing={submitLogin}
             />
 
-            <LoginButton onPress={submitLogin}>
-              <LoginButtonText>Entrar</LoginButtonText>
+            {authError && <ErrorText>{authError}</ErrorText>}
+
+            <LoginButton
+              disabled={!email || !password || authLoading}
+              onPress={submitLogin}>
+              <LoginButtonText>
+                {authLoading ? 'Loading' : 'Entrar'}
+              </LoginButtonText>
             </LoginButton>
           </ContainerInputs>
           <ForgotPassword>
@@ -116,13 +136,13 @@ export default function LoginScreen({navigation}: Props) {
             </CreateAccounButton>
           </CreateAccountContainer>
 
-          <ContainerTextOr>
+          {/* <ContainerTextOr>
             <LineTextOr />
             <TextOr>OU</TextOr>
             <LineTextOr />
-          </ContainerTextOr>
+          </ContainerTextOr> */}
 
-          {renderContainerSocial()}
+          {/* {renderContainerSocial()} */}
         </Container>
       </Background>
     </SafeArea>

@@ -5637,6 +5637,15 @@ realpath-native@^1.1.0:
   dependencies:
     util.promisify "^1.0.0"
 
+redux-offline-queue@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/redux-offline-queue/-/redux-offline-queue-1.0.8.tgz#8792e605c4a49c932d6628adf32cfbc00c7ac957"
+  integrity sha512-UMXlWCsXpduloefV/dPdmiFpxS5mLx841jUFiJBfDKvhJz9EP8GIPCYSfIQu7KlBp3tRL8AvHF/LIOScVfmw1A==
+  dependencies:
+    lodash "^4.17.13"
+    redux-persist "^6.0.0"
+    reduxsauce "^1.1.2"
+
 redux-persist@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"

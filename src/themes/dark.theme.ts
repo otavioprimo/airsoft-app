@@ -14,6 +14,7 @@ const DarkTheme: Theme = {
 
   primary: '#222',
   secondary: 'rgba(230,230,230,.7)',
+  secondaryDisabled: 'rgba(230,230,230,.3)',
   textPrimary: '#fff',
   textSecondary: '#222',
   background: '#222',

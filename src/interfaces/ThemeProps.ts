@@ -1,10 +1,12 @@
 export interface ThemeProps {
   theme: Theme;
+  disabled?: boolean;
 }
 
 export interface Theme {
   primary: string;
   secondary: string;
+  secondaryDisabled: string;
   textPrimary: string;
   textSecondary: string;
   background: string;

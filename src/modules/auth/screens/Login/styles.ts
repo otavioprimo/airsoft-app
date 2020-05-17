@@ -1,4 +1,8 @@
-import styled from 'styled-components/native';
+import styled, {css} from 'styled-components/native';
+import {Platform} from 'react-native';
+import GoogleButton from '~/modules/core/components/Social/google';
+import FacebookButton from '~/modules/core/components/Social/facebook';
+import AppleButton from '~/modules/core/components/Social/apple';
 
 import {ThemeProps} from '~/interfaces/ThemeProps';
 
@@ -30,7 +34,8 @@ export const ContainerInputs = styled.View`
 `;
 
 export const LoginButton = styled.TouchableOpacity`
-  background-color: ${({theme}: ThemeProps) => theme.secondary};
+  background-color: ${(props: ThemeProps) =>
+    props.disabled ? props.theme.secondaryDisabled : props.theme.secondary};
   height: 40px;
   justify-content: center;
   align-items: center;
@@ -105,4 +110,27 @@ export const ContainerSocial = styled.View`
 
 export const ContainerSocialIOS = styled.View`
   flex: 1;
+`;
+
+export const Google = styled(GoogleButton)`
+  ${Platform.select({
+    android: css`
+      flex: 1;
+    `,
+  })}
+`;
+export const Facebook = styled(FacebookButton)`
+  ${Platform.select({
+    android: css`
+      flex: 1;
+    `,
+  })}
+`;
+export const Apple = styled(AppleButton)``;
+
+export const ErrorText = styled.Text`
+  color: ${(props: ThemeProps) => props.theme.danger};
+  font-family: ${({theme}: ThemeProps) => theme.fontFamily};
+  font-size: 16px;
+  text-align: center;
 `;

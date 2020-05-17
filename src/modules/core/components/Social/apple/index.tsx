@@ -2,8 +2,7 @@ import React from 'react';
 import {TouchableOpacityProps} from 'react-native';
 import {faApple} from '@fortawesome/free-brands-svg-icons';
 
-import {Text, Icon} from '../commonStyle';
-import {ButtonSocial} from './styles';
+import {ButtonSocial, Text, Icon} from './styles';
 
 interface Props extends TouchableOpacityProps {}
 

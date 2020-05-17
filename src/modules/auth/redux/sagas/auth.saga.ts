@@ -1,20 +1,17 @@
 import {put, takeLatest, delay} from 'redux-saga/effects';
 import {AuthActions, AuthTypes} from '../reducer/auth.reducer';
 
-import * as rootNavigation from '~/utils/rootNavigation';
+// import * as rootNavigation from '~/utils/rootNavigation';
 import {Login} from '../types';
 
-export function* doLogin({email, password}: Login) {
+export function* doLogin(login: Login) {
   yield delay(2000);
 
+  // yield put(AuthActions.loginFailure('Email ou senha inválido'));
   yield put(
-    AuthActions.loginSuccess({
-      message: 'Foi',
-      data: {email, password},
-    }),
+    AuthActions.loginSuccess({message: 'Logado com sucesso', data: login}),
   );
-
-  rootNavigation.navigate('Signup');
+  // rootNavigation.navigate('Signup');
 }
 
 export default function* root() {
