@@ -1,14 +1,45 @@
-import {put, takeLatest, delay, call} from 'redux-saga/effects';
+import {put, takeLatest, call, select, delay} from 'redux-saga/effects';
 import {AuthActions, AuthTypes} from '../reducer/auth.reducer';
 
-// import * as rootNavigation from '~/utils/rootNavigation';
-import {Login, Signup} from '../types';
-import Api from '~/modules/core/services/Api';
-import {sanitalizeApiError} from '~/modules/core/services/api.helper';
-import SignUpResponse from '~/interfaces/ApiResponse/UserResponse/SignUpResponse';
-import {SessionActions} from '~/modules/session/redux/reducer/session.reducer';
 import * as RootNavigator from '~/utils/rootNavigation';
+
+import {Login, Signup, AppStart} from '../types';
+import Api from '~/modules/core/services/Api';
+
+import SignUpResponse from '~/interfaces/ApiResponse/UserResponse/SignUpResponse';
+
+import {sanitalizeApiError} from '~/modules/core/services/api.helper';
+import {SessionActions} from '~/modules/session/redux/reducer/session.reducer';
 import LoginResponse from '~/interfaces/ApiResponse/AuthResponse/LoginResponse';
+import {sessionTokenSelector} from '~/modules/session/redux/selectors/session.selector';
+
+export function* initApp() {
+  yield delay(1);
+  if (yield isLogged()) {
+    return yield put(AuthActions.appStart('inside'));
+  }
+
+  return yield put(AuthActions.appStart('outside'));
+}
+
+function* isLogged() {
+  const {token} = yield select(sessionTokenSelector);
+  return !!token;
+}
+
+export function* appStart({appRoot}: AppStart) {
+  switch (appRoot) {
+    case 'inside':
+      yield navigate('Home');
+      break;
+    default:
+      yield navigate('Auth', {screen: 'Login'});
+  }
+}
+
+function* navigate(route: string, params?: object) {
+  yield RootNavigator.reset(route, params);
+}
 
 export function* doLogin(login: Login) {
   try {
@@ -36,7 +67,16 @@ export function* signup(signUpData: Signup) {
   }
 }
 
+export function* logout() {
+  yield put(SessionActions.reset());
+  yield put(AuthActions.appStart('outside'));
+}
+
 export default function* root() {
+  yield takeLatest(AuthTypes.INIT_APP, initApp);
+  yield takeLatest(AuthTypes.APP_START, appStart);
+  yield takeLatest(AuthTypes.LOGOUT, logout);
+
   yield takeLatest(AuthTypes.LOGIN, doLogin);
   yield takeLatest(AuthTypes.SIGNUP, signup);
 }

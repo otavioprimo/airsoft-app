@@ -11,6 +11,10 @@ import {
 
 const {Types, Creators} = createActions<AuthActionTypes, CreatorsTypes>(
   {
+    initApp: null,
+    appStart: ['appRoot'],
+    logout: null,
+
     login: ['email', 'password'],
     loginSuccess: ['payload'],
     loginFailure: ['error'],

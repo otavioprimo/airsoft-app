@@ -33,6 +33,10 @@ interface State {
 export interface AuthState extends ImmutableObject<State> {}
 
 export interface AuthActionTypes {
+  INIT_APP: string;
+  APP_START: string;
+  LOGOUT: string;
+
   LOGIN: string;
   LOGIN_SUCCESS: string;
   LOGIN_FAILURE: string;
@@ -52,6 +56,14 @@ export interface SignUpSuccessPayload {
   token: string;
   refreshToken: string;
   data: IUser;
+}
+
+export interface InitApp extends Action<AuthActionTypes> {}
+
+export interface Logout extends Action<AuthActionTypes> {}
+
+export interface AppStart extends Action<AuthActionTypes> {
+  appRoot: string | null;
 }
 
 export interface Login extends Action<AuthActionTypes> {
@@ -83,7 +95,13 @@ export interface SignupFailure extends Action<AuthActionTypes> {
   error: string;
 }
 
+type AppRoot = 'inside' | 'outside';
+
 export interface CreatorsTypes {
+  initApp(): InitApp;
+  appStart(appRoot: AppRoot | null): AppStart;
+  logout(): Logout;
+
   login(email: string, password: string): Login;
   loginSuccess(payload: LoginSuccessPayloadType): LoginSuccess;
   loginFailure(error: any): LoginFailure;
@@ -104,4 +122,6 @@ export type ReducerTypes = Login &
   LoginFailure &
   Signup &
   SignupFailure &
-  SignupSuccess;
+  SignupSuccess &
+  InitApp &
+  Logout;
