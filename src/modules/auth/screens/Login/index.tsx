@@ -1,5 +1,5 @@
 import React, {createRef, useState} from 'react';
-import {TextInput} from 'react-native';
+import {TextInput, Platform} from 'react-native';
 import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 import {faLock} from '@fortawesome/free-solid-svg-icons';
 import {useDispatch, useSelector} from 'react-redux';
@@ -21,14 +21,14 @@ import {
   CreateAccountText,
   CreateAccounButton,
   ErrorText,
-  // TextOr,
-  // ContainerTextOr,
-  // LineTextOr,
-  // ContainerSocial,
-  // ContainerSocialIOS,
-  // Google,
-  // Facebook,
-  // Apple,
+  TextOr,
+  ContainerTextOr,
+  LineTextOr,
+  ContainerSocial,
+  ContainerSocialIOS,
+  Google,
+  Facebook,
+  Apple,
 } from './styles';
 import Logo from '~/modules/core/components/Logo';
 import {AuthActions} from '../../redux/reducer/auth.reducer';
@@ -53,6 +53,7 @@ export default function LoginScreen({navigation}: Props) {
   const authLoading = useSelector(authLoadingSelector);
 
   const submitLogin = () => {
+    if (email.trim().length > 0 && password.trim().length >= 6)
     dispatch(AuthActions.login(email, password));
   };
 
@@ -60,7 +61,6 @@ export default function LoginScreen({navigation}: Props) {
     navigation.navigate('Signup');
   };
 
-  /* TODO login social fora da Beta
   const renderContainerSocial = () => {
     if (Platform.OS === 'ios') {
       return (
@@ -79,72 +79,68 @@ export default function LoginScreen({navigation}: Props) {
       </ContainerSocial>
     );
   };
-  */
 
   return (
     <SafeArea>
-      <Background source={require('~/assets/cave.jpg')}>
-        <Overlay />
-        <Container>
-          <Logo />
-          <ContainerInputs>
-            <Input
-              leftIcon={faEnvelope}
-              placeholder="Email"
-              autoCapitalize="none"
-              autoCorrect
-              autoCompleteType="email"
-              keyboardType="email-address"
-              blurOnSubmit={false}
-              onChangeText={setEmail}
-              value={email}
-              returnKeyType="next"
-              onSubmitEditing={() => {
-                inputPassword.current?.focus();
-              }}
-            />
-            <Input
-              placeholder="Senha"
-              autoCorrect
-              autoCapitalize="none"
-              leftIcon={faLock}
-              secureTextEntry={true}
-              onChangeText={setPassword}
-              value={password}
-              ref={inputPassword}
-              onSubmitEditing={submitLogin}
-            />
+      <Container>
+        <Logo />
+        <ContainerInputs>
+          <Input
+            leftIcon={faEnvelope}
+            placeholder="Email"
+            autoCapitalize="none"
+            autoCorrect
+            autoCompleteType="email"
+            keyboardType="email-address"
+            blurOnSubmit={false}
+            onChangeText={setEmail}
+            value={email}
+            returnKeyType="next"
+            onSubmitEditing={() => {
+              inputPassword.current?.focus();
+            }}
+          />
+          <Input
+            placeholder="Senha"
+            autoCorrect
+            autoCapitalize="none"
+            leftIcon={faLock}
+            secureTextEntry={true}
+            onChangeText={setPassword}
+            value={password}
+            ref={inputPassword}
+            onSubmitEditing={submitLogin}
+          />
 
-            {authError && <ErrorText>{authError}</ErrorText>}
+          {authError && <ErrorText>{authError}</ErrorText>}
 
-            <LoginButton
-              disabled={!email || !password || authLoading}
-              onPress={submitLogin}>
-              <LoginButtonText>
-                {authLoading ? 'Loading' : 'Entrar'}
-              </LoginButtonText>
-            </LoginButton>
-          </ContainerInputs>
-          <ForgotPassword>
-            <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-          </ForgotPassword>
+          <LoginButton
+            disabled={!email || password.trim().length < 6 || authLoading}
+            onPress={submitLogin}>
+            <LoginButtonText>
+              {authLoading ? 'Verificando' : 'Entrar'}
+            </LoginButtonText>
+          </LoginButton>
+        </ContainerInputs>
+        <ForgotPassword>
+          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+        </ForgotPassword>
 
-          <CreateAccountContainer>
-            <DontHaveAccountText>Não tem uma conta?</DontHaveAccountText>
-            <CreateAccounButton onPress={signUp}>
-              <CreateAccountText>Cadastre-se aqui</CreateAccountText>
-            </CreateAccounButton>
-          </CreateAccountContainer>
+        <CreateAccountContainer>
+          <DontHaveAccountText>Não tem uma conta?</DontHaveAccountText>
+          <CreateAccounButton onPress={signUp}>
+            <CreateAccountText>Cadastre-se aqui</CreateAccountText>
+          </CreateAccounButton>
+        </CreateAccountContainer>
 
-          {/* <ContainerTextOr>
-            <LineTextOr />
-            <TextOr>OU</TextOr>
-            <LineTextOr />
-          </ContainerTextOr> */}
+        <ContainerTextOr>
+          <LineTextOr />
+          <TextOr>OU</TextOr>
+          <LineTextOr />
+        </ContainerTextOr>
 
-          {/* {renderContainerSocial()} */}
-        </Container>
-      </Background>
+        {renderContainerSocial()}
+      </Container>
     </SafeArea>
   );
 }

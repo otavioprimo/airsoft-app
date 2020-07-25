@@ -8,8 +8,7 @@ module.exports = {
           {
             rootPathSuffix: 'src',
             rootPathPrefix: '~/',
-          },
-          {
+          },        {
             rootPathSuffix: 'src/modules',
             rootPathPrefix: '#/',
           },

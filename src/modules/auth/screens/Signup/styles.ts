@@ -47,3 +47,11 @@ export const LoginButtonText = styled.Text`
   color: ${({theme}: ThemeProps) => theme.primary};
   font-size: 22px;
 `;
+
+export const ErrorText = styled.Text`
+  font-family: ${({theme}: ThemeProps) => theme.fontFamilySecondary};
+  color: ${({theme}: ThemeProps) => theme.danger};
+  font-size: 16px;
+  text-align: center;
+  margin-top: 16px;
+`;

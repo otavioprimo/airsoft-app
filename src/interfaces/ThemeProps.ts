@@ -6,10 +6,12 @@ export interface ThemeProps {
 export interface Theme {
   primary: string;
   secondary: string;
+  secondaryStrong: string;
   secondaryDisabled: string;
   textPrimary: string;
   textSecondary: string;
   background: string;
+  overlay: string;
 
   danger: string;
   success: string;

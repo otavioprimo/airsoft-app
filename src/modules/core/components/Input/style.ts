@@ -16,7 +16,6 @@ export const InputText = styled.TextInput.attrs(({theme}: ThemeProps) => ({
   border-bottom-color: ${({theme}: ThemeProps) => theme.secondary};
   border-bottom-width: 1px;
   flex: 1;
-  font-family: ${({theme}: ThemeProps) => theme.fontFamily};
 `;
 
 export const ContainerIcon = styled.View`

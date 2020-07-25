@@ -4,10 +4,10 @@ import {TextInputProps} from 'react-native';
 
 interface Props extends TextInputProps {
   leftIcon: any;
-  refProp?: any;
+  refProp?(ref: any): any;
 }
 
-const Input = React.forwardRef((props: Props, ref) => {
+const Input = React.forwardRef((props: Props, ref: any) => {
   return (
     <ContainerInput>
       {props.leftIcon && (

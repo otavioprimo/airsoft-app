@@ -1,36 +1,30 @@
-// import {Store} from '../store';
-import AppConfig from '../configs/AppConfig';
+import Axios from 'axios';
+import {getUrl} from './api.helper';
+import {ApiActions} from './api.types';
+import SignUpRequest from '~/interfaces/ApiRequests/UserRequest/SignUpRequest';
+import LoginRequest from '~/interfaces/ApiRequests/AuthRequest/LoginRequest';
+import SignUpResponse from '~/interfaces/ApiResponse/UserResponse/SignUpResponse';
+import LoginResponse from '~/interfaces/ApiResponse/AuthResponse/LoginResponse.ts';
 
-interface UrlParams {
-  version: number;
-  action: string;
-}
+const signup = async (request: SignUpRequest): Promise<SignUpResponse> => {
+  const response = await Axios.post(
+    getUrl({version: 1, action: ApiActions.User.create}),
+    request,
+  );
 
-export function getUrl({version = 1, action}: UrlParams) {
-  // Url da api em produção
-  let baseUrl = 'airsoft-api.herokuapp.com';
-  let protocol = 'https';
+  return response.data;
+};
 
-  if (AppConfig.TEST_LOCALHOST) {
-    protocol = 'http';
-    baseUrl = `${AppConfig.TEST_LOCALHOST_IP}:${AppConfig.TEST_LOCALHOST_PORT}`;
-  }
+const login = async (request: LoginRequest): Promise<LoginResponse> => {
+  const response = await Axios.post(
+    getUrl({version: 1, action: ApiActions.Auth.loginWithEmail}),
+    request,
+  );
 
-  return `${protocol}://${baseUrl}/v${version}/${action}`;
-}
+  return response.data;
+};
 
-/**
- * @description Pega o token de acesso a ser enviado no header
- * @returns Object - { Authorization: string }
- */
-// export const getAuthorizationHeaders = () => {
-//   const state = Store.getState(); // Pega o token do reducer
-//   if (state.session?.tokens) {
-//     const {token} = state.session.tokens;
-//     if (token) {
-//       return {
-//         Authorization: token,
-//       };
-//     }
-//   }
-// };
+export default {
+  signup,
+  login,
+};
