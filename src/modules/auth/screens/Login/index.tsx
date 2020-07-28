@@ -87,7 +87,7 @@ export default function LoginScreen({navigation}: Props) {
         <ContainerInputs>
           <Input
             leftIcon={faEnvelope}
-            placeholder="Email"
+            label="Email"
             autoCapitalize="none"
             autoCorrect
             autoCompleteType="email"
@@ -101,7 +101,7 @@ export default function LoginScreen({navigation}: Props) {
             }}
           />
           <Input
-            placeholder="Senha"
+            label="Senha"
             autoCorrect
             autoCapitalize="none"
             leftIcon={faLock}

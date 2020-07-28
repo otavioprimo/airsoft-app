@@ -1,6 +1,8 @@
 export interface ThemeProps {
   theme: Theme;
   disabled?: boolean;
+  focused?: boolean;
+  translateLabelY?: number;
 }
 
 export interface Theme {

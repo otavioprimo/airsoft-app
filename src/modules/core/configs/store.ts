@@ -14,6 +14,7 @@ import {
   suspendSaga,
   consumeActionMiddleware,
 } from 'redux-offline-queue';
+import {REHYDRATE} from 'redux-persist';
 
 import {rootReducers, rootSagas} from '~/modules';
 
@@ -41,7 +42,9 @@ const sagaMiddleware = createSagaMiddleware({
 
 const middlewares = [];
 
-middlewares.push(offlineMiddleware());
+middlewares.push(offlineMiddleware({
+  additionalTriggers: REHYDRATE,
+}));
 middlewares.push(suspendSaga(sagaMiddleware));
 middlewares.push(consumeActionMiddleware());
 
